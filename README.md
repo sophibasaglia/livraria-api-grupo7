@@ -5,7 +5,7 @@ Escola SENAI "Santo Paschoal Crepaldi" — Turma 1-2026-SESI_DEV_OC_1
 - Nome Completo 1 — @sophibasaglia
 - Nome Completo 2 — @AnaFumes
 - Nome Completo 3 — @yohanemoreno
-- Nome Completo 4 — @victorvichi-star
+- Nome Completo 4 — @victorvichi-dev
 ## Divisão de responsabilidades
 | Bloco | Integrante | O que ficou sob responsabilidade dele(a) |
 |---|---|---|
