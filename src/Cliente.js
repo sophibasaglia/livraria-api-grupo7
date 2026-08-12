@@ -2,6 +2,7 @@ const Pessoa = require("./Pessoa");
 
 class Cliente extends Pessoa {
   #pontosFidelidade;
+  #calcularDesconto
 
   constructor(nome, email, pontosFidelidade) {
     super(nome, email);
@@ -11,6 +12,8 @@ class Cliente extends Pessoa {
 
   get pontosFidelidade() {
     return this.#pontosFidelidade;
+
+    if(#pontos)
   }
   apresentar() {
     super.apresentar();
