@@ -10,8 +10,9 @@
 
 O objetivo do projeto é construir a API de gestão de uma livraria aplicando conceitos essenciais de **Programação Orientada a Objetos (POO)** em JavaScript, como encapsulamento, herança e polimorfismo.
 
-Na **Atividade 03 — Pessoas da Livraria**, o foco foi modelar o cadastro de pessoas que interagem com o sistema (clientes e funcionários), utilizando uma estrutura hierárquica a partir de uma classe-mãe:
-`Pessoa` ➔ `Cliente` / `Funcionario`
+Na **Atividade 03 — Pessoas da Livraria**, o foco foi modelar o cadastro de pessoas que interagem com o sistema (clientes, funcionários e administradores), utilizando uma estrutura hierárquica com herança em múltiplos níveis:  
+`Pessoa` ➔ `Cliente`  
+`Pessoa` ➔ `Funcionario` ➔ `Administrador`
 
 ---
 
@@ -33,9 +34,10 @@ Na **Atividade 03 — Pessoas da Livraria**, o foco foi modelar o cadastro de pe
 | Integrante | Arquivo / Atribuição | Descrição da Responsabilidade |
 | :--- | :--- | :--- |
 | **Sophia Basaglia** | `Pessoa.js` | Classe base (`Pessoa`) contendo atributos comuns (como `nome` e `email`) e métodos fundamentais. |
-| **Ana Beatriz** | `Cliente.js` | Classe filha (`Cliente`) herdando de `Pessoa` e adicionando atributos específicos (ex: `pontosFidelidade`). |
+| **Ana Beatriz** | `Cliente.js` | Classe filha (`Cliente`) herdando de `Pessoa`, com atributos específicos (`pontosFidelidade`) e cálculo de desconto. |
 | **Victor Vichi** | `Funcionario.js` | Classe filha (`Funcionario`) herdando de `Pessoa` com atributos específicos da equipe (ex: `cargo`, `salario`). |
 | **Yohane Moreno** | `testar.js` | Script de testes e validação, instanciando os objetos e verificando a herança e métodos no terminal. |
+| **Grupo 7 (Extra)** | `Administrador.js` | Subclasse de `Funcionario` (herança de dois níveis) com métodos exclusivos como `resetarSenha()`. |
 
 > ℹ️ *Esta tabela é atualizada a cada bloco com o rodízio de responsabilidades entre os integrantes do grupo.*
 
@@ -45,7 +47,7 @@ Na **Atividade 03 — Pessoas da Livraria**, o foco foi modelar o cadastro de pe
 
 - **Node.js** (Execução do código JavaScript no servidor)
 - **npm** (Gerenciador de pacotes)
-- **JavaScript ES6+** (`class`, `extends`, `super`, `#privateFields`)
+- **JavaScript ES6+** (`class`, `extends`, `super`, `#privateFields`, Polimorfismo e Herança Multinível)
 
 ---
 
@@ -53,21 +55,4 @@ Na **Atividade 03 — Pessoas da Livraria**, o foco foi modelar o cadastro de pe
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/livraria-api-grupo7.git
-   ```
-
-2. **Acesse a pasta do projeto:**
-   ```bash
-   cd livraria-api-grupo7
-   ```
-
-3. **Execute o arquivo de teste:**
-   ```bash
-   node testar.js
-   ```
-
----
-
-<p center align="center">
-  Desenvolvido com 💙 pelo Grupo 7 — SENAI 2026
-</p>
+   git clone [https://github.com/seu-usuario/livraria-api-grupo7.git](https://github.com/seu-usuario/livraria-api-grupo7.git)

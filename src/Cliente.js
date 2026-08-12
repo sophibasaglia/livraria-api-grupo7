@@ -1,8 +1,8 @@
+const Administrador = require("./Administrador");
 const Pessoa = require("./Pessoa");
 
 class Cliente extends Pessoa {
   #pontosFidelidade;
-  #calcularDesconto
 
   constructor(nome, email, pontosFidelidade) {
     super(nome, email);
@@ -12,13 +12,22 @@ class Cliente extends Pessoa {
 
   get pontosFidelidade() {
     return this.#pontosFidelidade;
-
-    if(#pontos)
   }
+
+  calcularDesconto() {
+    if(this.#pontosFidelidade > 100) {
+        return 10;
+    }
+    else {
+        return 0;
+    }
+  }
+
   apresentar() {
     super.apresentar();
     console.log("Tipo: Cliente");
     console.log("Pontos: " + this.#pontosFidelidade);
   }
 }
+
 module.exports = Cliente;
