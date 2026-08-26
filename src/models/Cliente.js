@@ -1,4 +1,4 @@
-const Administrador = require("./Administrador");
+const Administrador = require("../Administrador");
 const Pessoa = require("./Pessoa");
 
 class Cliente extends Pessoa {

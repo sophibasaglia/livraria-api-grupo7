@@ -1,4 +1,4 @@
-const Cliente = require("./Cliente");
+const Cliente = require("./models/Cliente");
 const Funcionario = require("./Funcionario");
 const Administrador = require("./Administrador");
 
