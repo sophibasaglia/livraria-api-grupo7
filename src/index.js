@@ -1,7 +1,7 @@
 const express = require("express");
 
 const app = express();
-const PORTA = 67;
+const PORTA = 4200;
 
 app.get("/", (req, res) => {
   res.send("API da Livraria no ar!");

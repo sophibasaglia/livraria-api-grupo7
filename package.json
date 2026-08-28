@@ -1,0 +1,24 @@
+{
+  "name": "livraria-api-grupo7",
+  "version": "1.0.0",
+  "description": "> Projeto desenvolvido na Unidade Curricular de **Programação Back-End**  \r > **Curso Técnico em Desenvolvimento de Sistemas** | Escola SENAI \"Santo Paschoal Crepaldi\"  \r > **Turma:** 1-2026-SESI_DEV_OC_1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sophibasaglia/livraria-api-grupo7.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sophibasaglia/livraria-api-grupo7/issues"
+  },
+  "homepage": "https://github.com/sophibasaglia/livraria-api-grupo7#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
