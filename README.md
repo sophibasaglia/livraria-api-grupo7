@@ -75,30 +75,42 @@ O projeto está sendo desenvolvido em blocos incrementais:
 | **A definir** | `src/models/LivroDigital.js` | Subclasse de `Livro` com atributos específicos do e-book (ex: `formatoArquivo`, `tamanhoMB`, `linkDownload`). |
 | **A definir** | `src/models/Carrinho.js` | Classe responsável por agregar itens (`Livro`), calcular totais, aplicar descontos do `Cliente` e gerenciar o fechamento do pedido. |
 
+### 🔹 Refatoração — Aula de 02/09/2026
+
+- **Refatoração de números imaginários:** substituição dos valores literais soltos no código (números imaginários/mágicos) por constantes declaradas e autoexplicativas (como `PRECO_KG` em `LivroFisico.js` e `PORCENTAGEM_BONUS` em `Funcionario.js`), aumentando a legibilidade e facilidade de manutenção.
+
 > ℹ️ *Esta tabela é atualizada a cada bloco com o rodízio de responsabilidades entre os integrantes do grupo.*
 
 ---
 
-## 🗂️ Estrutura de Pastas
+## 🗂️ Estrutura de Pastas (Esqueleto MVC)
 
 ```
 livraria-api-grupo7/
 ├── src/
+│   ├── controllers/
+│   │   ├── categoriaControllers.js
+│   │   └── livroControllers.js
 │   ├── models/
-│   │   ├── Pessoa.js
+│   │   ├── Administrador.js
+│   │   ├── Carrinho.js
+│   │   ├── Categoria.js
 │   │   ├── Cliente.js
 │   │   ├── Funcionario.js
-│   │   ├── Administrador.js
 │   │   ├── Livro.js
-│   │   ├── LivroFisico.js      🆕
-│   │   ├── LivroDigital.js     🆕
-│   │   ├── Categoria.js
-│   │   └── Carrinho.js         🆕
+│   │   ├── LivroDigital.js
+│   │   ├── LivroFisico.js
+│   │   ├── Pessoa.js
+│   │   └── testar.js
 │   ├── routes/
-│   └── controllers/
-├── testar.js
-├── server.js
+│   │   ├── categoriaRoutes.js
+│   │   └── livroRoutes.js
+│   ├── services/
+│   │   ├── categoriaServices.js
+│   │   └── livroServices.js
+│   └── index.js
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 
@@ -114,6 +126,9 @@ livraria-api-grupo7/
 
 - 🛒 **`Carrinho.js`** — nova classe de composição que reúne livros (físicos e/ou digitais) associados a um `Cliente`, permitindo calcular subtotal, aplicar pontos de fidelidade/desconto e finalizar a compra.
 
+
+- ⚙️ **Refatoração em 02/09 (Números Imaginários)** — substituição de números imaginários (valores literais soltos no código) por constantes declaradas (como `PRECO_KG` e `PORCENTAGEM_BONUS`), tornando as regras de negócio mais claras e evitando valores mágicos espalhados.
+
 Essas classes reforçam, na prática, o conceito de **polimorfismo**: ambas as subclasses de `Livro` podem sobrescrever métodos como `exibirDetalhes()` ou `calcularFrete()`, cada uma com seu próprio comportamento.
 
 ---
@@ -124,6 +139,11 @@ Essas classes reforçam, na prática, o conceito de **polimorfismo**: ambas as s
 - **Express.js** — criação e roteamento da API HTTP
 - **npm** — gerenciador de pacotes
 - **JavaScript ES6+** — `class`, `extends`, `super`, `#privateFields`, Polimorfismo, Herança Multinível e Composição de Objetos
+
+---
+## Link de Redirecionamento Para Visualização do Diagrama
+
+[_**Diagrama Grupo 7**_](https://drive.google.com/file/d/1TyP7EVOlvsZ-0Hs9bvbPVX7HSHEepDQm/view)   ← Clique aqui
 
 ---
 
@@ -146,12 +166,13 @@ Essas classes reforçam, na prática, o conceito de **polimorfismo**: ambas as s
 
 4. **Inicie o servidor:**
    ```bash
-   node server.js
+   npm run dev
+   # ou: node src/index.js
    ```
 
 5. **Rode os testes (opcional):**
    ```bash
-   node testar.js
+   node src/models/testar.js
    ```
 
 ---
