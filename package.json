@@ -4,7 +4,7 @@
   "description": "> Projeto desenvolvido na Unidade Curricular de **Programação Back-End**  \r > **Curso Técnico em Desenvolvimento de Sistemas** | Escola SENAI \"Santo Paschoal Crepaldi\"  \r > **Turma:** 1-2026-SESI_DEV_OC_1",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/sophibasaglia/livraria-api-grupo7#readme",
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

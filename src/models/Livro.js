@@ -17,7 +17,7 @@ class Livro {
     console.log("Categoria: " + this.categoria.nome);
   }
   valorEmEstoque() {
-    return this.preco * this.estoque;
+    return this.#preco * this.#estoque;
   }
   get preco() {
     return this.#preco;
@@ -32,5 +32,15 @@ class Livro {
     }
     this.#preco = novoPreco;
   }
+
+  toJSON(){
+    return {
+      titulo: this.titulo,
+      autor: this.autor,
+      preco: this.#preco,
+      estoque: this.#estoque
+    };
+  }
 }
+
 module.exports = Livro;
