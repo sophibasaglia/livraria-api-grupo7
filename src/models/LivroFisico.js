@@ -1,5 +1,5 @@
 const Livro = require("./Livro");
-
+const PRECO_KG = 2.5;
 class LivroFisico extends Livro {
   #peso;
 
@@ -13,7 +13,6 @@ class LivroFisico extends Livro {
   }
 
   calcularFrete() {
-    const PRECO_KG = 2.5;
     return this.#peso * PRECO_KG;
   }
 
