@@ -1,5 +1,9 @@
-// CONTROLLER (o "chef"): decide o que fazer com cada pedido.
-// Recebe da rota, chama o service certo, devolve a resposta.
-// Implementacao chega no Bloco 3.
+// CONTROLLER: decide o que fazer com cada pedido.
+const categoriaService = require("../services/categoriaServices");
 
-module.exports = {};
+function listar(req, res) {
+  const categorias = categoriaService.listarCategorias();
+  res.json(categorias);
+}
+
+module.exports = { listar };

@@ -11,7 +11,7 @@ function listar(req, res) {
 
 function buscarPorIndice(req, res){
     const indice = req.params.indice;
-    const livro = livroService.buscarLivroPorIndice(indice);
+    const livro = categoriaServices.buscarLivroPorIndice(indice);
 
     if(!livro){
         return res.status(404).json({erro: "Livro não encontrado"});

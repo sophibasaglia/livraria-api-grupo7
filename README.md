@@ -79,6 +79,10 @@ O projeto está sendo desenvolvido em blocos incrementais:
 
 - **Refatoração de números imaginários:** substituição dos valores literais soltos no código (números imaginários/mágicos) por constantes declaradas e autoexplicativas (como `PRECO_KG` em `LivroFisico.js` e `PORCENTAGEM_BONUS` em `Funcionario.js`), aumentando a legibilidade e facilidade de manutenção.
 
+### 🔹 Organizando rotas e logger — Aula de 16/09/2026
+
+- **Organizando Rotas e Logger:** Gerenciando os fluxos de aplicação, para definir caminhos, checar o acesso e registra-los no sistema (atualização do arquivo `index.js` e criação do arquivo `logger.js`).
+
 > ℹ️ *Esta tabela é atualizada a cada bloco com o rodízio de responsabilidades entre os integrantes do grupo.*
 
 ---

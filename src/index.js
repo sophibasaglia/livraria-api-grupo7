@@ -4,7 +4,7 @@ const routes = require("./routes");
 
 const logger = require("./middlewares/logger");
 
-
+  
 const app = express();
 const PORTA = 4200;
 

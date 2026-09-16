@@ -25,6 +25,13 @@ class Categoria {
     console.log("Categoria: " + this.#nome);
     console.log("Descricao: " + this.#descricao);
   }
+
+  toJSON() {
+    return {
+      nome: this.#nome,
+      descricao: this.#descricao,
+    };
+  }
 }
 
 module.exports = Categoria;
