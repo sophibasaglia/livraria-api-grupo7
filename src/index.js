@@ -9,6 +9,7 @@ const app = express();
 const PORTA = 4200;
 
 app.use(logger);
+app.use(express.json());
 app.use(routes);
 
 //app.use("/livros", livroRoutes);

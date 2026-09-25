@@ -27,10 +27,16 @@ class Livro {
   }
   set preco(novoPreco) {
     if (novoPreco < 0) {
-      console.log("ERRO: preco nao pode ser negativo. Valor recusado.");
-      return;
+      throw new Error("Preco nao pode ser negativo");
     }
     this.#preco = novoPreco;
+  }
+
+  set estoque(novoEstoque) {
+    if (novoEstoque < 0) {
+      throw new Error("Estoque nao pode ser negativo");
+    }
+    this.#estoque = novoEstoque;
   }
 
   toJSON(){

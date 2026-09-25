@@ -83,6 +83,33 @@ O projeto está sendo desenvolvido em blocos incrementais:
 
 - **Organizando Rotas e Logger:** Gerenciando os fluxos de aplicação, para definir caminhos, checar o acesso e registra-los no sistema (atualização do arquivo `index.js` e criação do arquivo `logger.js`).
 
+### 🔹 Atividade 12 — Os 5 Métodos HTTP Completos — Aula de 16/09/2026
+
+Implementação de CRUD completo para o recurso `Livro`, com status codes corretos conforme o guia HTTP.
+
+#### Tabela de Verificação (Postman)
+
+| Método | URL | Status esperado | Status obtido |
+| :----- | :--- | :---: | :---: |
+| GET | `/livros` | 200 | ✅ 200 |
+| GET | `/livros/0` | 200 | ✅ 200 |
+| GET | `/livros/99` | 404 | ✅ 404 |
+| POST | `/livros` | 201 | ✅ 201 |
+| PUT | `/livros/0` | 200 | ✅ 200 |
+| PATCH | `/livros/0` | 200 | ✅ 200 |
+| DELETE | `/livros/0` | 204 | ✅ 204 |
+| GET | `/livros/0` (após DELETE) | 404 | ✅ 404 |
+
+#### Experimento do Cabeçalho (Parte 3)
+
+Ao fazer `POST /livros` **sem** o cabeçalho `Content-Type: application/json`, o servidor retorna **500 Internal Server Error** com a mensagem:
+
+```
+Cannot read properties of undefined (reading 'titulo')
+```
+
+**Por quê?** O middleware `express.json()` só converte o corpo da requisição para objeto JavaScript quando o cabeçalho `Content-Type: application/json` está presente. Sem ele, o `express.json()` ignora o corpo e `req.body` fica `undefined`. Quando o controller tenta acessar `req.body.titulo`, o Node.js lança um TypeError — que o Express captura e devolve como erro 500. O cabeçalho não é burocracia: é a informação que diz ao servidor *como interpretar* o que está sendo enviado.
+
 > ℹ️ *Esta tabela é atualizada a cada bloco com o rodízio de responsabilidades entre os integrantes do grupo.*
 
 ---
