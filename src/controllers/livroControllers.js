@@ -4,6 +4,7 @@
 const livroService = require("../services/livroServices");
 
 function listar(req, res) {
+  const filtros = req.query;
   const livros = livroService.listarLivros();
   res.status(200).json(livros);
 }
@@ -37,6 +38,12 @@ function atualizarParcial(req, res) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
   }
   return res.status(200).json(livro);
+}
+
+function listar(req, res) {
+const filtros = req.query;
+const livros = livroService.listarLivros(filtros);
+res.status(200).json(livros);
 }
 
 function deletar(req, res) {
