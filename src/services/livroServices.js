@@ -9,9 +9,7 @@ const livros = [
 ];
 
 function listarTodos() {
-  if (filtros.precoMax) {
-resultado = resultado.filter((livro) => livro.preco <= Number(filtros.precoMax));
-}return livros;
+  return livros;
 }
 
 function buscarLivroPorIndice(indice) {
@@ -28,9 +26,21 @@ function listarLivros(filtros) {
   }
 
   if (filtros.precoMax) {
-    resultado = resultado.filter((livro) => livro.preco <= Number(filtros.precoMax),
+    resultado = resultado.filter(
+      (livro) => livro.preco <= Number(filtros.precoMax),
     );
   }
+
+  if (filtros.precoMin) {
+    resultado = resultado.filter(
+      (livro) => livro.preco <= Number(filtros.precoMin),
+    );
+  }
+   if (filtros.estoqueMin) {
+  resultado = resultado.filter(
+    (estoque) => estoque.quantidade <= Number(filtros.estoqueMin)
+  );
+}
   return resultado;
 }
 

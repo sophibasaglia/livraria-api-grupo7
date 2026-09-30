@@ -5,7 +5,7 @@ const livroService = require("../services/livroServices");
 
 function listar(req, res) {
   const filtros = req.query;
-  const livros = livroService.listarLivros();
+  const livros = livroService.listarLivros(filtros);
   res.status(200).json(livros);
 }
 
@@ -40,11 +40,6 @@ function atualizarParcial(req, res) {
   return res.status(200).json(livro);
 }
 
-function listar(req, res) {
-const filtros = req.query;
-const livros = livroService.listarLivros(filtros);
-res.status(200).json(livros);
-}
 
 function deletar(req, res) {
   const sucesso = livroService.deletarLivro(req.params.indice);
@@ -54,4 +49,11 @@ function deletar(req, res) {
   res.status(204).send();
 }
 
-module.exports = { listar, buscarPorIndice, criar, atualizar, atualizarParcial, deletar };
+module.exports = {
+  listar,
+  buscarPorIndice,
+  criar,
+  atualizar,
+  atualizarParcial,
+  deletar,
+};
