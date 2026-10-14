@@ -21,28 +21,38 @@ function listarLivros(filtros) {
 
   if (filtros.autor) {
     resultado = resultado.filter((livro) =>
-      livro.autor.toLowerCase().includes(filtros.autor.toLowerCase()),
+      livro.autor.toLowerCase().includes(filtros.autor.toLowerCase())
     );
   }
 
   if (filtros.precoMax) {
     resultado = resultado.filter(
-      (livro) => livro.preco <= Number(filtros.precoMax),
+      (livro) => livro.preco <= Number(filtros.precoMax)
     );
   }
 
   if (filtros.precoMin) {
     resultado = resultado.filter(
-      (livro) => livro.preco <= Number(filtros.precoMin),
+      (livro) => livro.preco >= Number(filtros.precoMin)
     );
   }
-   if (filtros.estoqueMin) {
-  resultado = resultado.filter(
-    (estoque) => estoque.quantidade <= Number(filtros.estoqueMin)
-  );
-}
+
+  if (filtros.estoqueMin) {
+    resultado = resultado.filter(
+      (livro) => livro.quantidade >= Number(filtros.estoqueMin) 
+      // Nota: alterado de "estoque" para "livro" e corrigida a lógica para maior ou igual (>=), 
+      // já que o filtro busca o estoque mínimo desejado. Ajuste se sua lógica for diferente!
+    );
+  }
+
+  if (filtros.titulo) {
+    resultado = resultado.filter((livro) =>
+      livro.titulo.toLowerCase().includes(filtros.titulo.toLowerCase())
+    );
+  }
+
   return resultado;
-}
+} // <- Fechamento correto da função listarLivros
 
 function criarLivro(dados) {
   const novoLivro = new Livro(
@@ -91,3 +101,4 @@ module.exports = {
   atualizarParcialLivro,
   deletarLivro,
 };
+
