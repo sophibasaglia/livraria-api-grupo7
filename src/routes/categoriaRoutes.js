@@ -1,9 +1,16 @@
-// ROTA: recebe a requisicao HTTP.
+// ROTA (o "garcom"): recebe a requisicao HTTP.
+// Aqui vao ficar os caminhos (endpoints) relacionados a Livro.
+
 const express = require("express");
-const categoriaControllers = require("../controllers/categoriaControllers");
+const categoriaController = require("../controllers/categoriaController");
 
 const router = express.Router();
 
-router.get("/", categoriaControllers.listar);
+router.get("/", categoriaController.listar);
+router.get("/:id", categoriaController.buscarPorId);
+router.post("/", categoriaController.criar);
+router.put("/:id", categoriaController.atualizar);
+router.patch("/:id", categoriaController.atualizarParcial);
+router.delete("/:id", categoriaController.deletar);
 
 module.exports = router;

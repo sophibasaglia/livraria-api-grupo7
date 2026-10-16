@@ -9,9 +9,10 @@ function listar(req, res) {
   res.status(200).json(livros);
 }
 
-function buscarPorIndice(req, res) {
-  const indice = req.params.indice;
-  const livro = livroService.buscarLivroPorIndice(indice);
+function buscarPorId(req, res) {
+  livroService.buscarLivroPorId
+  const id = parseInt (req.params.id);
+  const livro = livroService.buscarLivroPorId(id);
 
   if (!livro) {
     return res.status(404).json({ erro: "Livro não encontrado" });
@@ -25,7 +26,9 @@ function criar(req, res) {
 }
 
 function atualizar(req, res) {
-  const livro = livroService.atualizarLivro(req.params.indice, req.body);
+  const indice = parseInt(req.params.id);
+  const livro = livroService.atualizarLivro(req.params.id, req.body);
+  
   if (!livro) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
   }
@@ -33,7 +36,9 @@ function atualizar(req, res) {
 }
 
 function atualizarParcial(req, res) {
-  const livro = livroService.atualizarParcialLivro(req.params.indice, req.body);
+  const indice = parseInt(req.params.id);
+  const livro = livroService.atualizarParcialLivro(req.params.id, req.body);
+  
   if (!livro) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
   }
@@ -42,7 +47,9 @@ function atualizarParcial(req, res) {
 
 
 function deletar(req, res) {
-  const sucesso = livroService.deletarLivro(req.params.indice);
+  const indice = parseInt(req.params.id);
+  const sucesso = livroService.deletarLivro(req.params.id);
+  
   if (!sucesso) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
   }
@@ -51,7 +58,7 @@ function deletar(req, res) {
 
 module.exports = {
   listar,
-  buscarPorIndice,
+  buscarPorId,
   criar,
   atualizar,
   atualizarParcial,

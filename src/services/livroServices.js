@@ -1,72 +1,74 @@
 // SERVICE (o "cozinheiro"): executa a logica de verdade.
 // Buscar, calcular, validar.
 
-const Livro = require("../models/Livro");
+const Livro = require("../models/Livro")
 
-const livros = [
-  new Livro("Clean Code", "Robert C. Martin", 89.9, 12),
-  new Livro("Eloquent JavaScript", "Marjin Haverbeke", 45, 20),
-];
+const livros = [];
+let proximoId = 1;
+
+criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12,});
+
+criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20,});
+
+criarLivro({ titulo: "O verão que mudou minha vida", autor: "Jenny Han", preco: 90.0, estoque: 10,});
+
+criarLivro({ titulo: "O pequeno Príncipe", autor: "Antoine de Saint Exupery", preco: 50.0, estoque: 5,});
 
 function listarTodos() {
   return livros;
 }
 
-function buscarLivroPorIndice(indice) {
-  return livros[indice];
+function buscarLivroPorId(id) {
+return livros.find((livro) => livro.id === Number(id));
 }
 
-function listarLivros(filtros) {
+function listarLivros(filtros = {}) { // Garante que filtros seja um objeto, mesmo se não enviarem nada
   let resultado = livros;
 
-  if (filtros.autor) {
+  if (filtros && filtros.autor) {
     resultado = resultado.filter((livro) =>
-      livro.autor.toLowerCase().includes(filtros.autor.toLowerCase())
+      livro.autor && livro.autor.toLowerCase().includes(String(filtros.autor).toLowerCase()),
     );
   }
 
-  if (filtros.precoMax) {
+  if (filtros && filtros.precoMax) {
     resultado = resultado.filter(
-      (livro) => livro.preco <= Number(filtros.precoMax)
+      (livro) => livro.preco <= Number(filtros.precoMax),
     );
   }
 
-  if (filtros.precoMin) {
+  if (filtros && filtros.precoMin) {
     resultado = resultado.filter(
-      (livro) => livro.preco >= Number(filtros.precoMin)
+      (livro) => livro.preco >= Number(filtros.precoMin),
     );
   }
 
-  if (filtros.estoqueMin) {
+  if (filtros && filtros.estoqueMin) {
     resultado = resultado.filter(
-      (livro) => livro.quantidade >= Number(filtros.estoqueMin) 
-      // Nota: alterado de "estoque" para "livro" e corrigida a lógica para maior ou igual (>=), 
-      // já que o filtro busca o estoque mínimo desejado. Ajuste se sua lógica for diferente!
+      (livro) => livro.estoque >= Number(filtros.estoqueMin), 
+      // Nota: Mudei "livro.quantidade" para "livro.estoque" para bater com o seu modelo acima
     );
   }
 
-  if (filtros.titulo) {
+  if (filtros && filtros.titulo) {
     resultado = resultado.filter((livro) =>
-      livro.titulo.toLowerCase().includes(filtros.titulo.toLowerCase())
+      livro.titulo && livro.titulo.toLowerCase().includes(String(filtros.titulo).toLowerCase()),
     );
   }
 
   return resultado;
-} // <- Fechamento correto da função listarLivros
+}
 
 function criarLivro(dados) {
-  const novoLivro = new Livro(
-    dados.titulo,
-    dados.autor,
-    dados.preco,
-    dados.estoque,
-  );
-  livros.push(novoLivro);
-  return novoLivro;
+const novoLivro = new Livro(dados.titulo, dados.autor, dados.preco, dados.estoque);
+novoLivro.id = proximoId;
+proximoId++;
+livros.push(novoLivro);
+return novoLivro;
 }
 
 function atualizarLivro(indice, dados) {
-  const livro = livros[indice];
+  const livro = buscarLivroPorId(id);
   if (!livro) return null;
   livro.titulo = dados.titulo;
   livro.autor = dados.autor;
@@ -76,7 +78,7 @@ function atualizarLivro(indice, dados) {
 }
 
 function atualizarParcialLivro(indice, dados) {
-  const livro = livros[indice];
+  const livro = buscarLivroPorId(id);
   if (!livro) return null;
   if (dados.titulo !== undefined) livro.titulo = dados.titulo;
   if (dados.autor !== undefined) livro.autor = dados.autor;
@@ -85,20 +87,20 @@ function atualizarParcialLivro(indice, dados) {
   return livro;
 }
 
-function deletarLivro(indice) {
-  const livro = livros[indice];
-  if (!livro) return false;
-  livros.splice(indice, 1);
-  return true;
+function deletarLivro(id) {
+const posicao = livros.findIndex((livro) => livro.id === Number(id));
+if (posicao === -1) return false;
+livros.splice(posicao, 1);
+return true;
 }
+
 
 module.exports = {
   listarTodos,
   listarLivros,
-  buscarLivroPorIndice,
+  buscarLivroPorId,
   criarLivro,
   atualizarLivro,
   atualizarParcialLivro,
   deletarLivro,
 };
-
