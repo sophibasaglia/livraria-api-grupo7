@@ -6,6 +6,21 @@ const Livro = require("../models/Livro")
 const livros = [];
 let proximoId = 1;
 
+function validarLivro(dados, completo) {
+if (!dados) return "Envie os dados do livro em JSON";
+if (completo && !dados.titulo) return "O titulo e obrigatorio";
+if (completo && !dados.autor) return "O autor e obrigatorio";
+if (completo && dados.preco === undefined) return "O preco e obrigatorio";
+if (completo && dados.estoque === undefined) return "O estoque e obrigatorio";
+if (dados.preco !== undefined && (typeof dados.preco !== "number" || dados.preco < 0)) {
+return "O preco deve ser um numero maior ou igual a zero";
+}
+if (dados.estoque !== undefined && (typeof dados.estoque !== "number" || dados.estoque )) {
+return "O estoque deve ser um numero maior ou igual a zero";
+}
+return null;
+}
+
 criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12,});
 
 criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20,});

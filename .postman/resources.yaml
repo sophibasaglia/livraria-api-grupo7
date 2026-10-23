@@ -1,0 +1,5 @@
+workspace:
+  id: b16ba2c1-35bb-4895-82a3-5828ef7207ec
+cloudResources:
+  collections:
+    ../postman/collections/Livraria API grupo 7: 59118941-eec18bc7-97df-4761-a3f2-a468d593c9ea

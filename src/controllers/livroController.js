@@ -20,12 +20,24 @@ function buscarPorId(req, res) {
   return res.status(200).json(livro);
 }
 
+
 function criar(req, res) {
+  const erro = livroService.validarLivro(req.body, true);
+  if (erro) {
+  res.status(400).json({ erro: erro });
+  return;
+  }
   const novoLivro = livroService.criarLivro(req.body);
   res.status(201).json(novoLivro);
 }
 
 function atualizar(req, res) {
+  const erro = livroService.validarLivro(req.body, true);
+  if (erro) {
+  res.status(400).json({ erro: erro });
+  return;
+  }
+
   const indice = parseInt(req.params.id);
   const livro = livroService.atualizarLivro(req.params.id, req.body);
   
@@ -36,6 +48,12 @@ function atualizar(req, res) {
 }
 
 function atualizarParcial(req, res) {
+  const erro = livroService.validarLivro(req.body, true);
+  if (erro) {
+  res.status(400).json({ erro: erro });
+  return;
+  }
+
   const indice = parseInt(req.params.id);
   const livro = livroService.atualizarParcialLivro(req.params.id, req.body);
   
