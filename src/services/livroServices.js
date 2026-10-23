@@ -67,7 +67,7 @@ livros.push(novoLivro);
 return novoLivro;
 }
 
-function atualizarLivro(indice, dados) {
+function atualizarLivro(id, dados) {
   const livro = buscarLivroPorId(id);
   if (!livro) return null;
   livro.titulo = dados.titulo;
@@ -77,7 +77,8 @@ function atualizarLivro(indice, dados) {
   return livro;
 }
 
-function atualizarParcialLivro(indice, dados) {
+
+function atualizarParcialLivro(id, dados) {
   const livro = buscarLivroPorId(id);
   if (!livro) return null;
   if (dados.titulo !== undefined) livro.titulo = dados.titulo;
