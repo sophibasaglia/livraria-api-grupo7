@@ -7,6 +7,7 @@ const livros = [];
 let proximoId = 1;
 
 function validarLivro(dados, completo) {
+ HEAD:src/services/livroService.js
   if (!dados) return "Envie os dados do livro em JSON";
   if (completo && !dados.titulo) return "O titulo e obrigatorio";
   if (completo && !dados.autor) return "O autor e obrigatorio";

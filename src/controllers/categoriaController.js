@@ -1,6 +1,3 @@
-// CONTROLLER (o "chef"): decide o que fazer com cada pedido.
-// Recebe da rota, chama o service certo, devolve a resposta.
-
 const categoriaService = require("../services/categoriaServices");
 
 function listar(req, res) {
@@ -37,7 +34,7 @@ function atualizar(req, res) {
 
   const id = parseInt(req.params.id);
   const categoria = categoriaService.atualizarCategoria(id, req.body);
-  
+
   if (!categoria) {
     return res.status(404).json({ erro: "Categoria não encontrada" });
   }
@@ -52,7 +49,7 @@ function atualizarParcial(req, res) {
 
   const id = parseInt(req.params.id);
   const categoria = categoriaService.atualizarParcialCategoria(id, req.body);
-  
+
   if (!categoria) {
     return res.status(404).json({ erro: "Categoria não encontrada" });
   }
@@ -62,7 +59,7 @@ function atualizarParcial(req, res) {
 function deletar(req, res) {
   const id = parseInt(req.params.id);
   const sucesso = categoriaService.deletarCategoria(id);
-  
+
   if (!sucesso) {
     return res.status(404).json({ erro: "Categoria não encontrada" });
   }

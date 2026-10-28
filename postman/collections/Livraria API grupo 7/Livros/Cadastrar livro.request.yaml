@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/livros"
+method: POST
+body:
+  type: json
+  content: "   \r
+
+    \    { \"autor\": \"Ninguem\" } "
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", function () {\r
+
+      pm.response.to.have.status(201);\r
+
+      });\r
+
+      pm.collectionVariables.set(\"livroId\", pm.response.json().id);"
+    language: text/javascript
+examples: .resources/Cadastrar livro.resources/examples
+order: 3746

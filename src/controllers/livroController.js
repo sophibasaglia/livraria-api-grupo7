@@ -1,6 +1,3 @@
-// CONTROLLER (o "chef"): decide o que fazer com cada pedido.
-// Recebe da rota, chama o service certo, devolve a resposta.
-
 const livroService = require("../services/livroService");
 
 function listar(req, res) {
@@ -21,7 +18,6 @@ function buscarPorId(req, res) {
 
 function criar(req, res) {
   const erro = livroService.validarLivro(req.body, true);
-  
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
@@ -32,14 +28,13 @@ function criar(req, res) {
 
 function atualizar(req, res) {
   const erro = livroService.validarLivro(req.body, true);
-
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
   const id = parseInt(req.params.id);
   const livro = livroService.atualizarLivro(id, req.body);
-  
+
   if (!livro) {
     return res.status(404).json({ erro: "Livro não encontrado" });
   }
@@ -47,15 +42,14 @@ function atualizar(req, res) {
 }
 
 function atualizarParcial(req, res) {
-  const erro = livroService.validarLivro(req.body, false); // Geralmente validação parcial usa false para não exigir todos os campos
-
+  const erro = livroService.validarLivro(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
   const id = parseInt(req.params.id);
   const livro = livroService.atualizarParcialLivro(id, req.body);
-  
+
   if (!livro) {
     return res.status(404).json({ erro: "Livro não encontrado" });
   }
@@ -65,7 +59,7 @@ function atualizarParcial(req, res) {
 function deletar(req, res) {
   const id = parseInt(req.params.id);
   const sucesso = livroService.deletarLivro(id);
-  
+
   if (!sucesso) {
     return res.status(404).json({ erro: "Livro não encontrado" });
   }
@@ -78,5 +72,5 @@ module.exports = {
   criar,
   atualizar,
   atualizarParcial,
-  deletar
+  deletar,
 };
