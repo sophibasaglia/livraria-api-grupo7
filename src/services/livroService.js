@@ -1,4 +1,5 @@
 // src/services/livroService.js
+const { db } = require("../config/db");
 const Livro = require("../models/Livro");
 
 const livros = [];
@@ -26,13 +27,26 @@ function validarLivro(dados, completo) {
 criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12, categoria: "Programação" });
 criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20, categoria: "Programação" });
 
-function listarLivros(filtros = {}) {
-  let resultado = livros;
-  if (filtros.autor) resultado = resultado.filter((l) => l.autor.toLowerCase().includes(filtros.autor.toLowerCase()));
-  if (filtros.titulo) resultado = resultado.filter((l) => l.titulo.toLowerCase().includes(filtros.titulo.toLowerCase()));
-  if (filtros.precoMax) resultado = resultado.filter((l) => l.preco <= Number(filtros.precoMax));
-  if (filtros.precoMin) resultado = resultado.filter((l) => l.preco >= Number(filtros.precoMin));
-  return resultado.map((l) => l.toJSON());
+async function listarLivros(filtros = {}) {
+  const [linhas] = await db.query("SELECT * FROM livros");
+  let resultado = linhas;
+  if (filtros.autor) {
+    resultado = resultado.filter((l) =>
+      l.autor && l.autor.toLowerCase().includes(String(filtros.autor).toLowerCase())
+    );
+  }
+  if (filtros.titulo) {
+    resultado = resultado.filter((l) =>
+      l.titulo && l.titulo.toLowerCase().includes(String(filtros.titulo).toLowerCase())
+    );
+  }
+  if (filtros.precoMax) {
+    resultado = resultado.filter((l) => l.preco <= Number(filtros.precoMax));
+  }
+  if (filtros.precoMin) {
+    resultado = resultado.filter((l) => l.preco >= Number(filtros.precoMin));
+  }
+  return resultado.map((l) => (typeof l.toJSON === "function" ? l.toJSON() : l));
 }
 
 function buscarLivroPorId(id) {
