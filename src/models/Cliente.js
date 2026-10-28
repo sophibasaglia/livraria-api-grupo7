@@ -1,12 +1,12 @@
-const Administrador = require("../Administrador");
-const Pessoa = require("./Pessoa");
+const Pessoas = require("./Pessoas");
 
-class Cliente extends Pessoa {
+const VALOR_PORCENTAGEM = 50;
+
+class Cliente extends Pessoas {
   #pontosFidelidade;
 
   constructor(nome, email, pontosFidelidade) {
     super(nome, email);
-
     this.#pontosFidelidade = pontosFidelidade;
   }
 
@@ -14,19 +14,29 @@ class Cliente extends Pessoa {
     return this.#pontosFidelidade;
   }
 
-  calcularDesconto() {
-    if(this.#pontosFidelidade > 100) {
-        return 10;
+  set pontosFidelidade(novosPontos) {
+    if (novosPontos < 0) {
+      console.log("ERRO: Pontos de fidelidade nao podem ser menores que 0.");
+      return;
     }
-    else {
-        return 0;
-    }
+    this.#pontosFidelidade = novosPontos;
   }
 
-  apresentar() {
-    super.apresentar();
-    console.log("Tipo: Cliente");
-    console.log("Pontos: " + this.#pontosFidelidade);
+  adicionarCompra(valorCompra) {
+    if (valorCompra < 0) {
+      console.log("ERRO: Valor da compra nao pode ser menor que 0.");
+      return;
+    }
+    const pontosGanhos = valorCompra / VALOR_PORCENTAGEM;
+    this.#pontosFidelidade += pontosGanhos;
+    console.log(
+      `Compra R$ ${valorCompra.toFixed(2)} registrada (+${pontosGanhos} pontos ganhos).`,
+    );
+  }
+
+  descrever() {
+    super.descrever();
+    console.log(`Pontos de fidelidade: ${this.#pontosFidelidade}`);
   }
 }
 

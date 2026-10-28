@@ -1,22 +1,24 @@
-const categoriaService = require("../services/categoriaServices");
+// src/controllers/categoriaController.js
+const categoriaService = require("../services/categoriaService");
 
 function listar(req, res) {
-  const filtros = req.query;
-  const categorias = categoriaService.listarCategorias(filtros);
+  const categorias = categoriaService.listarCategorias(req.query);
   return res.status(200).json(categorias);
 }
 
 function buscarPorId(req, res) {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   const categoria = categoriaService.buscarCategoriaPorId(id);
 
   if (!categoria) {
-    return res.status(404).json({ erro: "Categoria não encontrada" });
+    return res.status(404).json({ erro: "Categoria nao encontrada" });
   }
+
   return res.status(200).json(categoria);
 }
 
 function criar(req, res) {
+  // Validação completa (nome é obrigatório)
   const erro = categoriaService.validarCategoria(req.body, true);
   if (erro) {
     return res.status(400).json({ erro: erro });
@@ -27,42 +29,47 @@ function criar(req, res) {
 }
 
 function atualizar(req, res) {
+  // Validação completa no PUT (nome é obrigatório)
   const erro = categoriaService.validarCategoria(req.body, true);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
-  const id = parseInt(req.params.id);
-  const categoria = categoriaService.atualizarCategoria(id, req.body);
+  const id = req.params.id;
+  const categoriaAtualizada = categoriaService.atualizarCategoria(id, req.body);
 
-  if (!categoria) {
-    return res.status(404).json({ erro: "Categoria não encontrada" });
+  if (!categoriaAtualizada) {
+    return res.status(404).json({ erro: "Categoria nao encontrada" });
   }
-  return res.status(200).json(categoria);
+
+  return res.status(200).json(categoriaAtualizada);
 }
 
 function atualizarParcial(req, res) {
+  // Validação parcial no PATCH (somente valida se o nome for enviado)
   const erro = categoriaService.validarCategoria(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
-  const id = parseInt(req.params.id);
-  const categoria = categoriaService.atualizarParcialCategoria(id, req.body);
+  const id = req.params.id;
+  const categoriaAtualizada = categoriaService.atualizarParcialCategoria(id, req.body);
 
-  if (!categoria) {
-    return res.status(404).json({ erro: "Categoria não encontrada" });
+  if (!categoriaAtualizada) {
+    return res.status(404).json({ erro: "Categoria nao encontrada" });
   }
-  return res.status(200).json(categoria);
+
+  return res.status(200).json(categoriaAtualizada);
 }
 
 function deletar(req, res) {
-  const id = parseInt(req.params.id);
-  const sucesso = categoriaService.deletarCategoria(id);
+  const id = req.params.id;
+  const apagado = categoriaService.deletarCategoria(id);
 
-  if (!sucesso) {
-    return res.status(404).json({ erro: "Categoria não encontrada" });
+  if (!apagado) {
+    return res.status(404).json({ erro: "Categoria nao encontrada" });
   }
+
   return res.status(204).send();
 }
 

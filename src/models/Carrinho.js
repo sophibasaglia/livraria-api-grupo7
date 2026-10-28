@@ -1,17 +1,25 @@
 class Carrinho {
   #livros;
+
   constructor() {
     this.#livros = [];
   }
+
   adicionarLivro(livro) {
     this.#livros.push(livro);
   }
+
+  removerLivro(titulo) {
+    this.#livros = this.#livros.filter((livro) => livro.titulo !== titulo);
+  }
+
   listar() {
     console.log("--- Itens do carrinho ---");
     this.#livros.forEach((livro) => {
       console.log(livro.titulo + " - R$ " + livro.preco);
     });
   }
+
   calcularTotal() {
     let total = 0;
     this.#livros.forEach((livro) => {
@@ -20,4 +28,5 @@ class Carrinho {
     return total;
   }
 }
+
 module.exports = Carrinho;

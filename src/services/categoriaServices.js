@@ -3,18 +3,12 @@ const Categoria = require("../models/Categoria");
 const categorias = [];
 let proximoId = 1;
 
-function validarCategoria(dados, completo) {
-  if (!dados) return "Envie os dados da categoria em JSON";
-  if (completo && !dados.nome) return "O nome e obrigatorio";
-  if (
-    dados.nome !== undefined &&
-    (typeof dados.nome !== "string" || dados.nome.length < 3)
-  ) {
-    return "O nome deve ter pelo menos 3 letras";
-  }
-  return null;
-}
+criarCategoria({
+  nome: "Ficção",
+  descricao: "Romances, fantasia e ficção científica",
+});
 
+criarCategoria({ nome: "Tecnologia", descricao: "Programação e afins" });
 function listarCategorias() {
   return categorias;
 }
@@ -49,27 +43,20 @@ function atualizarParcialCategoria(id, dados) {
 
 function deletarCategoria(id) {
   const posicao = categorias.findIndex(
-    (categoria) => categoria.id === Number(id)
+    (categoria) => categoria.id === Number(id),
   );
 
   if (posicao === -1) return false;
   categorias.splice(posicao, 1);
   return true;
+
 }
 
-// Inicializa dados de teste
-criarCategoria({
-  nome: "Ficção",
-  descricao: "Romances, fantasia e ficção científica",
-});
-criarCategoria({ nome: "Tecnologia", descricao: "Programação e afins" });
-
 module.exports = {
-  validarCategoria,
   listarCategorias,
   buscarCategoriaPorId,
   criarCategoria,
   atualizarCategoria,
   atualizarParcialCategoria,
   deletarCategoria,
-};
+}

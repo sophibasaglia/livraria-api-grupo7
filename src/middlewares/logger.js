@@ -3,4 +3,5 @@ function logger(req, res, next) {
   console.log(`[${dataHora}] ${req.method} ${req.originalUrl}`);
   next();
 }
+
 module.exports = logger;
