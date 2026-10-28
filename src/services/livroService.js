@@ -1,28 +1,44 @@
 // SERVICE (o "cozinheiro"): executa a logica de verdade.
 // Buscar, calcular, validar.
 
-const Livro = require("../models/Livro")
+const Livro = require("../models/Livro");
 
 const livros = [];
 let proximoId = 1;
 
-criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12,});
+function validarLivro(dados, completo) {
+  if (!dados) return "Envie os dados do livro em JSON";
+  if (completo && !dados.titulo) return "O titulo e obrigatorio";
+  if (completo && !dados.autor) return "O autor e obrigatorio";
+  if (completo && dados.preco === undefined) return "O preco e obrigatorio";
+  if (completo && dados.estoque === undefined) return "O estoque e obrigatorio";
+  
+  if (dados.preco !== undefined && (typeof dados.preco !== "number" || dados.preco < 0)) {
+    return "O preco deve ser um numero maior ou igual a zero";
+  }
+  
+  if (dados.estoque !== undefined && (typeof dados.estoque !== "number" || dados.estoque < 0)) {
+    return "O estoque deve ser um numero maior ou igual a zero";
+  }
+  
+  return null;
+}
 
-criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20,});
-
-criarLivro({ titulo: "O verão que mudou minha vida", autor: "Jenny Han", preco: 90.0, estoque: 10,});
-
-criarLivro({ titulo: "O pequeno Príncipe", autor: "Antoine de Saint Exupery", preco: 50.0, estoque: 5,});
+// Criando alguns livros iniciais
+criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12 });
+criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20 });
+criarLivro({ titulo: "O verão que mudou minha vida", autor: "Jenny Han", preco: 90.0, estoque: 10 });
+criarLivro({ titulo: "O pequeno Príncipe", autor: "Antoine de Saint Exupery", preco: 50.0, estoque: 5 });
 
 function listarTodos() {
   return livros;
 }
 
 function buscarLivroPorId(id) {
-return livros.find((livro) => livro.id === Number(id));
+  return livros.find((livro) => livro.id === Number(id));
 }
 
-function listarLivros(filtros = {}) { // Garante que filtros seja um objeto, mesmo se não enviarem nada
+function listarLivros(filtros = {}) {
   let resultado = livros;
 
   if (filtros && filtros.autor) {
@@ -46,7 +62,6 @@ function listarLivros(filtros = {}) { // Garante que filtros seja um objeto, mes
   if (filtros && filtros.estoqueMin) {
     resultado = resultado.filter(
       (livro) => livro.estoque >= Number(filtros.estoqueMin), 
-      // Nota: Mudei "livro.quantidade" para "livro.estoque" para bater com o seu modelo acima
     );
   }
 
@@ -60,11 +75,11 @@ function listarLivros(filtros = {}) { // Garante que filtros seja um objeto, mes
 }
 
 function criarLivro(dados) {
-const novoLivro = new Livro(dados.titulo, dados.autor, dados.preco, dados.estoque);
-novoLivro.id = proximoId;
-proximoId++;
-livros.push(novoLivro);
-return novoLivro;
+  const novoLivro = new Livro(dados.titulo, dados.autor, dados.preco, dados.estoque);
+  novoLivro.id = proximoId;
+  proximoId++;
+  livros.push(novoLivro);
+  return novoLivro;
 }
 
 function atualizarLivro(id, dados) {
@@ -77,7 +92,6 @@ function atualizarLivro(id, dados) {
   return livro;
 }
 
-
 function atualizarParcialLivro(id, dados) {
   const livro = buscarLivroPorId(id);
   if (!livro) return null;
@@ -89,12 +103,11 @@ function atualizarParcialLivro(id, dados) {
 }
 
 function deletarLivro(id) {
-const posicao = livros.findIndex((livro) => livro.id === Number(id));
-if (posicao === -1) return false;
-livros.splice(posicao, 1);
-return true;
+  const posicao = livros.findIndex((livro) => livro.id === Number(id));
+  if (posicao === -1) return false;
+  livros.splice(posicao, 1);
+  return true;
 }
-
 
 module.exports = {
   listarTodos,
@@ -104,4 +117,5 @@ module.exports = {
   atualizarLivro,
   atualizarParcialLivro,
   deletarLivro,
+  validarLivro, // Adicionado aqui para o controller conseguir usar!
 };

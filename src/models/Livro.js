@@ -26,11 +26,11 @@ class Livro {
     return this.#estoque;
   }
   set preco(novoPreco) {
-    if (novoPreco < 0) {
-      throw new Error("Preco nao pode ser negativo");
-    }
-    this.#preco = novoPreco;
-  }
+if (novoPreco < PRECO_MINIMO) {
+throw new Error("Preco nao pode ser negativo");
+}
+this.#preco = novoPreco;
+}
 
   set estoque(novoEstoque) {
     if (novoEstoque < 0) {
