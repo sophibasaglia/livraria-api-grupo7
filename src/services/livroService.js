@@ -55,7 +55,6 @@ const [resultado] = await db.query(
 return await buscarLivroPorId(resultado.insertId);
 }
 
-
 async function atualizarLivro(id, dados) {
   const [resultado] = await db.query(
     
