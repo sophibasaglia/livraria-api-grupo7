@@ -55,11 +55,14 @@ const [resultado] = await db.query(
 return await buscarLivroPorId(resultado.insertId);
 }
 
+
 async function atualizarLivro(id, dados) {
   const [resultado] = await db.query(
+    
     "UPDATE livros SET titulo = ?, autor = ?, preco = ?, estoque = ? WHERE id = ?",
     [dados.titulo, dados.autor, dados.preco, dados.estoque, id],
   );
+
   if (resultado.affectedRows === 0) return null;
   return await buscarLivroPorId(id);
 }

@@ -1,4 +1,4 @@
-
+// src/controllers/livroController.js
 const livroService = require("../services/livroService");
 
 async function listar(req, res) {
@@ -17,7 +17,7 @@ async function buscarPorId(req, res) {
 }
 
 async function criar(req, res) {
-  const erro =  await livroService.validarLivro(req.body, true);
+  const erro = livroService.validarLivro(req.body, true);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
@@ -26,14 +26,14 @@ async function criar(req, res) {
   return res.status(201).json(novoLivro);
 }
 
- async function atualizar(req, res) {
-  const erro = await livroService.validarLivro(req.body, false);
+async function atualizar(req, res) {
+  const erro = livroService.validarLivro(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
   const id = req.params.id;
-  const livroAtualizado = livroService.atualizarLivro(id, req.body);
+  const livroAtualizado = await livroService.atualizarLivro(id, req.body);
 
   if (!livroAtualizado) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
@@ -42,13 +42,13 @@ async function criar(req, res) {
 }
 
 async function atualizarParcial(req, res) {
-  const erro = await livroService.validarLivro(req.body, false);
+  const erro = livroService.validarLivro(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
   const id = req.params.id;
-  const livroAtualizado = livroService.atualizarParcialLivro(id, req.body);
+  const livroAtualizado = await livroService.atualizarParcialLivro(id, req.body);
 
   if (!livroAtualizado) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
