@@ -1,4 +1,4 @@
-// src/controllers/livroController.js
+
 const livroService = require("../services/livroService");
 
 async function listar(req, res) {
@@ -16,18 +16,18 @@ async function buscarPorId(req, res) {
   return res.status(200).json(livro);
 }
 
-function criar(req, res) {
-  const erro = livroService.validarLivro(req.body, true);
+async function criar(req, res) {
+  const erro =  await livroService.validarLivro(req.body, true);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
 
-  const novoLivro = livroService.criarLivro(req.body);
+  const novoLivro = await livroService.criarLivro(req.body);
   return res.status(201).json(novoLivro);
 }
 
-function atualizar(req, res) {
-  const erro = livroService.validarLivro(req.body, false);
+ async function atualizar(req, res) {
+  const erro = await livroService.validarLivro(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
@@ -41,8 +41,8 @@ function atualizar(req, res) {
   return res.status(200).json(livroAtualizado);
 }
 
-function atualizarParcial(req, res) {
-  const erro = livroService.validarLivro(req.body, false);
+async function atualizarParcial(req, res) {
+  const erro = await livroService.validarLivro(req.body, false);
   if (erro) {
     return res.status(400).json({ erro: erro });
   }
@@ -56,9 +56,9 @@ function atualizarParcial(req, res) {
   return res.status(200).json(livroAtualizado);
 }
 
-function deletar(req, res) {
+async function deletar(req, res) {
   const id = req.params.id;
-  const apagado = livroService.deletarLivro(id);
+  const apagado = await livroService.deletarLivro(id);
 
   if (!apagado) {
     return res.status(404).json({ erro: "Livro nao encontrado" });
