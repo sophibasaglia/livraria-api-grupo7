@@ -48,7 +48,7 @@ async function listarLivros(filtros = {}) {
   return resultado.map((l) => (typeof l.toJSON === "function" ? l.toJSON() : l));
 }
 
-
+   
 async function buscarLivroPorId(id) {
 const [linhas] = await db.query("SELECT * FROM livros WHERE id = ?", [id]);
 return linhas[0];
