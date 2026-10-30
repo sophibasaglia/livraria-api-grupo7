@@ -1,4 +1,4 @@
-// src/services/livroService.js
+
 const { db } = require("../config/db");
 const Livro = require("../models/Livro");
 
@@ -23,7 +23,6 @@ function validarLivro(dados, completo) {
   return null;
 }
 
-// Cria os livros iniciais: IDs 1 e 2
 criarLivro({ titulo: "Clean Code", autor: "Robert C. Martin", preco: 89.9, estoque: 12, categoria: "Programação" });
 criarLivro({ titulo: "Eloquent JavaScript", autor: "Marijn Haverbeke", preco: 45.0, estoque: 20, categoria: "Programação" });
 
@@ -49,12 +48,12 @@ async function listarLivros(filtros = {}) {
   return resultado.map((l) => (typeof l.toJSON === "function" ? l.toJSON() : l));
 }
 
-function buscarLivroPorId(id) {
-  if (id === undefined || id === null) return null;
-  const idNumerico = Number(id);
-  const livro = livros.find((l) => l.id === idNumerico);
-  return livro ? livro.toJSON() : null;
+
+async function buscarLivroPorId(id) {
+const [linhas] = await db.query("SELECT * FROM livros WHERE id = ?", [id]);
+return linhas[0];
 }
+
 
 function criarLivro(dados) {
   const novoLivro = new Livro(dados.titulo, dados.autor, dados.preco, dados.estoque, dados.categoria);
@@ -66,7 +65,7 @@ function criarLivro(dados) {
 
 function atualizarLivro(id, dados) {
   const idNumerico = Number(id);
-  const livro = livros.find((l) => l.id === idNumerico);
+  const livro = livros.find((livro) => livro.id === Number(id));
   if (!livro) return null;
 
   livro.titulo = dados.titulo || livro.titulo;
@@ -80,7 +79,7 @@ function atualizarLivro(id, dados) {
 
 function atualizarParcialLivro(id, dados) {
   const idNumerico = Number(id);
-  const livro = livros.find((l) => l.id === idNumerico);
+  const livro = livros.find((livro) => livro.id === Number(id));
   if (!livro) return null;
 
   if (dados.titulo !== undefined) livro.titulo = dados.titulo;
