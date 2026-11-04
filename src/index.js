@@ -11,14 +11,13 @@ const tratarErros = require("./middlewares/tratarErros");
 const app = express();
 const PORTA = 4200;
 
-// 1. Middleware para interpretar requisições com corpo em JSON
+
 app.use(express.json());
 
-// 2. Logger e rotas principais da API
 app.use(logger);
 app.use(routes);
 
-// 3. Rotas auxiliares/base
+
 app.get("/", (req, res) => {
   res.send("API da Livraria no ar!");
 });
