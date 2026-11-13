@@ -44,6 +44,13 @@ async function listarLivros(filtros = {}) {
   if (filtros.precoMin) {
     resultado = resultado.filter((l) => l.preco >= Number(filtros.precoMin));
   }
+  if (filtros.categoria) {
+    resultado = resultado.filter(
+      (livro) =>
+        livro.categoria !== null &&
+        livro.categoria.toLowerCase().includes(filtros.categoria.toLowerCase()),
+    );
+  }
   return resultado.map((l) => (typeof l.toJSON === "function" ? l.toJSON() : l));
 }
 
