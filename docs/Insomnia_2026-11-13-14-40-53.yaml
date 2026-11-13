@@ -1,0 +1,294 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: API-livraria
+meta:
+  id: wrk_720c6d22861a4a6eb70c803d7326ef9f
+  created: 1791996370645
+  modified: 1791996370645
+  description: ""
+collection:
+  - url: http://localhost:4200
+    name: API /
+    meta:
+      id: req_1fea3e386f0a46f19a1419a0632e714e
+      created: 1791996389107
+      modified: 1791997790196
+      isPrivate: false
+      description: ""
+      sortKey: -1791996389107
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "http://localhost:4200/livros?categoria=TEC "
+    name: /livros
+    meta:
+      id: req_9f70ab3c7b824c5bb3172ec07e7e475d
+      created: 1791997563635
+      modified: 1794586806118
+      isPrivate: false
+      description: ""
+      sortKey: -1791997563635
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/categorias
+    name: /livros/.id
+    meta:
+      id: req_cd6eb135aed743b2810d67b33a8b683d
+      created: 1791997602281
+      modified: 1794583751593
+      isPrivate: false
+      description: ""
+      sortKey: -1791997602281
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros/999999
+    name: /livros/99
+    meta:
+      id: req_785cceb855f440ebbef29c4bf051d8b4
+      created: 1791997634163
+      modified: 1793815848153
+      isPrivate: false
+      description: ""
+      sortKey: -1791997634163
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros
+    name: /livros
+    meta:
+      id: req_a24aca0acc8f4a2381ed96ea48c4e8b3
+      created: 1791997648333
+      modified: 1793816901063
+      isPrivate: false
+      description: ""
+      sortKey: -1791997648334
+    method: POST
+    body:
+      mimeType: application/json
+      text: '{ "titulo": "X", }'
+    headers:
+      - name: Content-Type
+        value: application/json
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros/99999
+    name: /livros/0
+    meta:
+      id: req_fa13c6f6e8994be58efb55eca9fecea9
+      created: 1791997965012
+      modified: 1793385394365
+      isPrivate: false
+      description: ""
+      sortKey: -1791997965012
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"titulo": "Clean code - Atualizado",
+        	"autor": "Robert C. Martin",
+        	"preco": 99.9,
+        	"estoque": 15,
+        	"categoria": "Programação"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros
+    name: PATCH-200
+    meta:
+      id: req_738a33c4010e4496ab96e79a87caf20c
+      created: 1791998410158
+      modified: 1794575022194
+      isPrivate: false
+      description: ""
+      sortKey: -1791998410158
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: '{ "categoria_id": 2 }'
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/categorias/5
+    name: DELETE-204
+    meta:
+      id: req_25531a8600df412f873a9b44bfebd8ce
+      created: 1791998492413
+      modified: 1794584090493
+      isPrivate: false
+      description: ""
+      sortKey: -1791998492413
+    method: DELETE
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros/2
+    name: GET-404
+    meta:
+      id: req_cc4ed862b1a34cc6ad8bbef07f6a96a2
+      created: 1791998548241
+      modified: 1794568934412
+      isPrivate: false
+      description: ""
+      sortKey: -1791998548241
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/categorias/99999
+    name: POST/categorias/99999
+    meta:
+      id: req_3693f90ae80f49409b2261107ae64997
+      created: 1794568914812
+      modified: 1794590088551
+      isPrivate: false
+      description: ""
+      sortKey: -1794568914812
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/categorias
+    name: POST/categorias
+    meta:
+      id: req_6cee6d90d2ce4f0a931df7d68fabaefe
+      created: 1794569308030
+      modified: 1794590060253
+      isPrivate: false
+      description: ""
+      sortKey: -1794569308030
+    method: POST
+    body:
+      mimeType: application/json
+      text: '{ "nome": "Infantil", "descricao": "Livros para criancas" }'
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/livros/3
+    name: PATH/categorias
+    meta:
+      id: req_d049f1473a864673b27566ce626f1ddb
+      created: 1794569368220
+      modified: 1794590129025
+      isPrivate: false
+      description: ""
+      sortKey: -1794569368220
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: '{ "categoria_id": 1 }'
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:4200/categorias/2
+    name: DELETE/categorias
+    meta:
+      id: req_342e520387ca4c8e98981a58b7e3bf0a
+      created: 1794575424773
+      modified: 1794590027447
+      isPrivate: false
+      description: ""
+      sortKey: -1794575424773
+    method: DELETE
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_2b8567bc5c2189d198a08b237caf71c458da912b
+    created: 1791996370649
+    modified: 1793811182509
+environments:
+  name: Base Environment
+  meta:
+    id: env_2b8567bc5c2189d198a08b237caf71c458da912b
+    created: 1791996370647
+    modified: 1793811182510
+    isPrivate: false
