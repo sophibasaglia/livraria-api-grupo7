@@ -8,7 +8,9 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Insomnia](https://img.shields.io/badge/Insomnia-4000BF?style=for-the-badge&logo=insomnia&logoColor=white)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge)
 
 </div>
@@ -17,9 +19,9 @@
 
 ## 📌 Sobre o Projeto
 
-O objetivo do projeto é construir a API de gestão de uma livraria aplicando conceitos essenciais de **Programação Orientada a Objetos (POO)** em JavaScript, como **encapsulamento**, **herança** e **polimorfismo**.
+O objetivo do projeto é construir a API de gestão de uma livraria aplicando conceitos essenciais de **Programação Orientada a Objetos (POO)** e arquitetura Back-End em JavaScript/Node.js, evoluindo desde modelos em memória até a persistência relacional com **MySQL**.
 
-O projeto está sendo desenvolvido em blocos incrementais:
+O projeto foi desenvolvido em blocos incrementais:
 
 - **Atividade 03 — Pessoas da Livraria:** modelagem do cadastro de pessoas que interagem com o sistema (clientes, funcionários e administradores), com herança em múltiplos níveis:
   ```
@@ -32,6 +34,7 @@ O projeto está sendo desenvolvido em blocos incrementais:
   Livro ➔ LivroDigital
   Carrinho (composição: agrega Livros e Clientes)
   ```
+- **Bloco 4 — Persistência Relacional com MySQL:** substituição do armazenamento em memória por banco de dados relacional MySQL via `mysql2/promise`, com criação das tabelas `categorias` e `livros`, suporte a chave estrangeira (`1:N`), arquitetura em camadas (Controllers, Services, Middlewares e Config) e tratamento de erros do banco de dados (ex: `400`, `404`, `409`, `503`).
 
 ---
 
@@ -48,80 +51,52 @@ O projeto está sendo desenvolvido em blocos incrementais:
 
 ## 📋 Divisão de Responsabilidades
 
-### 🔹 Bloco 1 — Aula de 07/08/2026
+### 🔹 Bloco 1 — Modelagem POO
+- Criação e validação das classes `Pessoa`, `Cliente`, `Funcionario`, `Administrador` e script `testar.js`.
 
-| Integrante | Arquivo / Atribuição | Descrição da Responsabilidade |
-| :--- | :--- | :--- |
-| **Sophia Basaglia** | `Pessoa.js` | Classe base (`Pessoa`) contendo atributos comuns (como `nome` e `email`) e métodos fundamentais. |
-| **Ana Beatriz** | `Cliente.js` | Classe filha (`Cliente`) herdando de `Pessoa`, com atributos específicos (`pontosFidelidade`) e cálculo de desconto. |
-| **Victor Vichi** | `Funcionario.js` | Classe filha (`Funcionario`) herdando de `Pessoa` com atributos específicos da equipe (ex: `cargo`, `salario`). |
-| **Yohane Moreno** | `testar.js` | Script de testes e validação, instanciando os objetos e verificando a herança e métodos no terminal. |
-| **Grupo 7 (Extra)** | `Administrador.js` | Subclasse de `Funcionario` (herança de dois níveis) com métodos exclusivos como `resetarSenha()`. |
+### 🔹 Bloco 2 — Servidor Express & Estrutura Inicial
+- Configuração do Express, roteamento básico e criação dos models de `Livro` e `Categoria`.
 
-### 🔹 Bloco 2 — Aula de 26/08/2026
+### 🔹 Bloco 3 — Catálogo & Métodos HTTP
+- Especialização de livros (`LivroFisico`, `LivroDigital`) e `Carrinho`.
+- Implementação dos verbos HTTP (GET, POST, PUT, PATCH, DELETE) com middlewares de logging e validações.
 
-| Integrante | Arquivo / Atribuição | Descrição da Responsabilidade |
-| :--- | :--- | :--- |
-| **Sophia Basaglia** | `server.js` / Express | Instalação do Express e inicialização do servidor HTTP rodando na porta definida. |
-| **Victor Vichi** | Estrutura de Pastas | Criação das 3 pastas principais do projeto e inclusão dos 3 arquivos de referência. |
-| **Yohane Moreno** | `src/models/Livro.js` | Consolidação do model `Livro.js` na nova estrutura de pastas do projeto. |
-| **Ana Beatriz** | `src/models/Categoria.js` | Consolidação do model `Categoria.js` na nova estrutura de pastas do projeto. |
-
-### 🔹 Bloco 3 — Novidades do Catálogo 🆕
-
-| Integrante | Arquivo / Atribuição | Descrição da Responsabilidade |
-| :--- | :--- | :--- |
-| **A definir** | `src/models/LivroFisico.js` | Subclasse de `Livro` com atributos específicos do exemplar físico (ex: `estoque`, `peso`, `localizacao`). |
-| **A definir** | `src/models/LivroDigital.js` | Subclasse de `Livro` com atributos específicos do e-book (ex: `formatoArquivo`, `tamanhoMB`, `linkDownload`). |
-| **A definir** | `src/models/Carrinho.js` | Classe responsável por agregar itens (`Livro`), calcular totais, aplicar descontos do `Cliente` e gerenciar o fechamento do pedido. |
-
-### 🔹 Refatoração — Aula de 02/09/2026
-
-- **Refatoração de números imaginários:** substituição dos valores literais soltos no código (números imaginários/mágicos) por constantes declaradas e autoexplicativas (como `PRECO_KG` em `LivroFisico.js` e `PORCENTAGEM_BONUS` em `Funcionario.js`), aumentando a legibilidade e facilidade de manutenção.
-
-### 🔹 Organizando rotas e logger — Aula de 16/09/2026
-
-- **Organizando Rotas e Logger:** Gerenciando os fluxos de aplicação, para definir caminhos, checar o acesso e registra-los no sistema (atualização do arquivo `index.js` e criação do arquivo `logger.js`).
-
-### 🔹 Atividade 12 — Os 5 Métodos HTTP Completos — Aula de 16/09/2026
-
-Implementação de CRUD completo para o recurso `Livro`, com status codes corretos conforme o guia HTTP.
-
-#### Tabela de Verificação (Postman)
-
-| Método | URL | Status esperado | Status obtido |
-| :----- | :--- | :---: | :---: |
-| GET | `/livros` | 200 | ✅ 200 |
-| GET | `/livros/0` | 200 | ✅ 200 |
-| GET | `/livros/99` | 404 | ✅ 404 |
-| POST | `/livros` | 201 | ✅ 201 |
-| PUT | `/livros/0` | 200 | ✅ 200 |
-| PATCH | `/livros/0` | 200 | ✅ 200 |
-| DELETE | `/livros/0` | 204 | ✅ 204 |
-| GET | `/livros/0` (após DELETE) | 404 | ✅ 404 |
-
-#### Experimento do Cabeçalho (Parte 3)
-
-Ao fazer `POST /livros` **sem** o cabeçalho `Content-Type: application/json`, o servidor retorna **500 Internal Server Error** com a mensagem:
-
-```
-Cannot read properties of undefined (reading 'titulo')
-```
-
-**Por quê?** O middleware `express.json()` só converte o corpo da requisição para objeto JavaScript quando o cabeçalho `Content-Type: application/json` está presente. Sem ele, o `express.json()` ignora o corpo e `req.body` fica `undefined`. Quando o controller tenta acessar `req.body.titulo`, o Node.js lança um TypeError — que o Express captura e devolve como erro 500. O cabeçalho não é burocracia: é a informação que diz ao servidor *como interpretar* o que está sendo enviado.
-
-> ℹ️ *Esta tabela é atualizada a cada bloco com o rodízio de responsabilidades entre os integrantes do grupo.*
+### 🔹 Bloco 4 — Integração com MySQL & Tratamento de Erros 🆕
+- **Conexão e Pool MySQL:** configuração centralizada em `src/config/db.js` com variáveis de ambiente (`dotenv`).
+- **Banco e Relacionamento:** script SQL (`database/livraria.sql`) contendo as tabelas `categorias` e `livros` com relacionamento via chave estrangeira `categoria_id`.
+- **Camada de Serviços (`src/services`):** separação de regras de negócio e consultas SQL parametrizadas (`livroService.js` e `categoriaService.js`).
+- **Tratamento Global de Erros (`src/middlewares/tratarErros.js`):** captura e mapeamento de códigos do MySQL:
+  - `ECONNREFUSED` ➔ `503 Service Unavailable`
+  - `ER_DATA_TOO_LONG` / `ER_WARN_DATA_OUT_OF_RANGE` ➔ `400 Bad Request`
+  - `ER_NO_REFERENCED_ROW_2` ➔ `400 Bad Request` (categoria informada não existe)
+  - `ER_ROW_IS_REFERENCED_2` ➔ `409 Conflict` (categoria possui livros vinculados e não pode ser excluída)
+- **Documentação e Testes de API:** exportação de collection para Insomnia e Postman na pasta `docs/` e `.postman/`.
 
 ---
 
-## 🗂️ Estrutura de Pastas (Esqueleto MVC)
+## 🗂️ Estrutura de Pastas
 
 ```
 livraria-api-grupo7/
+├── .postman/
+│   ├── entrega-bloco3.postman_collection.json
+│   └── resources.yaml
+├── database/
+│   └── livraria.sql
+├── docs/
+│   ├── diagrama-classes-v2.png
+│   └── Insomnia_2026-11-13-14-40-53.yaml
 ├── src/
+│   ├── config/
+│   │   └── db.js
 │   ├── controllers/
-│   │   ├── categoriaControllers.js
-│   │   └── livroControllers.js
+│   │   ├── categoriaController.js
+│   │   └── livroController.js
+│   ├── middlewares/
+│   │   ├── logger.js
+│   │   ├── rotaNaoEncontrada.js
+│   │   ├── tratarErros.js
+│   │   └── validarId.js
 │   ├── models/
 │   │   ├── Administrador.js
 │   │   ├── Carrinho.js
@@ -132,14 +107,17 @@ livraria-api-grupo7/
 │   │   ├── LivroDigital.js
 │   │   ├── LivroFisico.js
 │   │   ├── Pessoa.js
+│   │   ├── Pessoas.js
 │   │   └── testar.js
 │   ├── routes/
 │   │   ├── categoriaRoutes.js
+│   │   ├── index.js
 │   │   └── livroRoutes.js
 │   ├── services/
-│   │   ├── categoriaServices.js
-│   │   └── livroServices.js
+│   │   ├── categoriaService.js
+│   │   └── livroService.js
 │   └── index.js
+├── .env.example
 ├── package.json
 ├── package-lock.json
 └── README.md
@@ -147,64 +125,75 @@ livraria-api-grupo7/
 
 ---
 
-## 🧩 Novidades desta Atualização
+## 📬 Testando as Rotas com o Insomnia
 
-- 📦 **`LivroFisico.js`** — herda de `Livro` e representa exemplares tangíveis do acervo, controlando estoque e informações logísticas.
+Disponibilizamos o arquivo de exportação das requisições pronto para importação no **Insomnia** dentro da pasta [`docs/`](./docs):
 
+- 📄 **Arquivo:** [`docs/Insomnia_2026-11-13-14-40-53.yaml`](./docs/Insomnia_2026-11-13-14-40-53.yaml)
 
-- 💻 **`LivroDigital.js`** — herda de `Livro` e representa e-books, controlando dados de arquivo e disponibilidade digital.
-
-
-- 🛒 **`Carrinho.js`** — nova classe de composição que reúne livros (físicos e/ou digitais) associados a um `Cliente`, permitindo calcular subtotal, aplicar pontos de fidelidade/desconto e finalizar a compra.
-
-
-- ⚙️ **Refatoração em 02/09 (Números Imaginários)** — substituição de números imaginários (valores literais soltos no código) por constantes declaradas (como `PRECO_KG` e `PORCENTAGEM_BONUS`), tornando as regras de negócio mais claras e evitando valores mágicos espalhados.
-
-Essas classes reforçam, na prática, o conceito de **polimorfismo**: ambas as subclasses de `Livro` podem sobrescrever métodos como `exibirDetalhes()` ou `calcularFrete()`, cada uma com seu próprio comportamento.
+### Como importar no Insomnia:
+1. Abra o **Insomnia**.
+2. Clique em **Preferences / Configurações** ou no menu superior de Workspaces.
+3. Selecione a opção **Import Data** -> **From File**.
+4. Selecione o arquivo `Insomnia_2026-11-13-14-40-53.yaml` localizado na pasta `docs/`.
+5. Todas as requisições configuradas (CRUD de Livros e Categorias com exemplos de sucesso e erro) serão carregadas automaticamente.
 
 ---
 
 ## 🛠️ Tecnologias e Conceitos
 
-- **Node.js** — execução do código JavaScript no servidor
-- **Express.js** — criação e roteamento da API HTTP
-- **npm** — gerenciador de pacotes
-- **JavaScript ES6+** — `class`, `extends`, `super`, `#privateFields`, Polimorfismo, Herança Multinível e Composição de Objetos
+- **Node.js** — ambiente de execução JavaScript no servidor
+- **Express.js** — framework para criação e roteamento da API REST
+- **MySQL / mysql2** — banco de dados relacional e driver com suporte a promises e pool de conexões
+- **dotenv** — gerenciamento seguro de variáveis de ambiente
+- **Insomnia / Postman** — ferramentas de teste e validação de requisições HTTP
+- **JavaScript ES6+** — Classes, POO, async/await, middlewares e arquitetura em camadas (MVC/Services)
 
 ---
-## Link de Redirecionamento Para Visualização do Diagrama
 
-[_**Diagrama Grupo 7**_](https://drive.google.com/file/d/1TyP7EVOlvsZ-0Hs9bvbPVX7HSHEepDQm/view)   ← Clique aqui
+## 📐 Diagrama de Classes
+
+Confira o diagrama de classes atualizado na pasta `docs/` ou através do link abaixo:
+
+- [Visualizar imagem do diagrama em `docs/diagrama-classes-v2.png`](./docs/diagrama-classes-v2.png)
+- [_**Link no Google Drive — Diagrama Grupo 7**_](https://drive.google.com/file/d/1TyP7EVOlvsZ-0Hs9bvbPVX7HSHEepDQm/view)
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/seu-usuario/livraria-api-grupo7.git
-   ```
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/seu-usuario/livraria-api-grupo7.git
+cd livraria-api-grupo7
+```
 
-2. **Acesse a pasta do projeto:**
-   ```bash
-   cd livraria-api-grupo7
-   ```
+### 2. Instalar dependências
+```bash
+npm install
+```
 
-3. **Instale as dependências:**
-   ```bash
-   npm install
-   ```
+### 3. Configurar o Banco de Dados MySQL
+1. Abra o **MySQL Workbench** ou seu cliente MySQL preferido.
+2. Execute o script contido em [`database/livraria.sql`](./database/livraria.sql) para criar o banco de dados `livraria`, as tabelas `categorias` e `livros`, e os dados de exemplo.
+3. Crie um arquivo `.env` na raiz do projeto com base no `.env.example`:
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_NAME=livraria
+```
 
-4. **Inicie o servidor:**
-   ```bash
-   npm run dev
-   # ou: node src/index.js
-   ```
+### 4. Iniciar a API
+```bash
+# Modo de desenvolvimento (com nodemon)
+npm run dev
 
-5. **Rode os testes (opcional):**
-   ```bash
-   node src/models/testar.js
-   ```
+# Ou modo tradicional
+node src/index.js
+```
+A API iniciará por padrão em `http://localhost:4200`.
 
 ---
 
@@ -213,4 +202,3 @@ Essas classes reforçam, na prática, o conceito de **polimorfismo**: ambas as s
 Feito com 💙 pelo **Grupo 7** — SENAI "Santo Paschoal Crepaldi"
 
 </div>
-
