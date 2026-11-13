@@ -14,4 +14,5 @@ if (err.code === "ER_DATA_TOO_LONG" || err.code === "ER_WARN_DATA_OUT_OF_RANGE")
 res.status(500).json({ erro: "Erro interno no servidor" });
 }
 
+
 module.exports = tratarErros;
